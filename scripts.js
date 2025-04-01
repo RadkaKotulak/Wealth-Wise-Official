@@ -576,41 +576,7 @@ function exportToExcel() {
     XLSX.utils.book_append_sheet(wb, ws, "Wealth_Wise");
     XLSX.writeFile(wb, 'wealth_wise.xlsx');
 }
-function handleFileUpload() {
-    const fileInput = document.getElementById('fileInput');
-    const file = fileInput.files[0];
 
-    if (!file) {
-        alert('Please select an Excel file first.');
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        const data = e.target.result;
-        const workbook = XLSX.read(data, { type: 'binary' });
-
-        // Assuming the first sheet contains the transaction data
-        const sheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(sheet);
-
-        // Parse and add the data to the table
-        jsonData.forEach(row => {
-            const { ID, Description, Amount, Date, Type, Category } = row;
-            addTransaction(Description, Amount, Date, Type, Category);
-        });
-
-        alert('Transactions successfully uploaded!');
-    };
-
-    reader.onerror = function(error) {
-        console.error(error);
-        alert('Error reading the file.');
-    };
-
-    reader.readAsBinaryString(file);
-}
 
 // Load transactions from localStorage on page load (if any)
 window.onload = function() {
@@ -910,7 +876,7 @@ function mapCategory(categoryLabel) {
         'Other Expense': 'otherExpense'
     };
 
-    return categoryMap[categoryLabel] || 'other_expense';
+    return categoryMap[categoryLabel] || 'otherExpense';
 }
 
 function addTransactionFromExcel(description, amount, date, type, category) {
@@ -927,6 +893,7 @@ function addTransactionFromExcel(description, amount, date, type, category) {
     saveTransactions();
     updateTable();
 }
+
 
 function deleteSelectedTransactions() {
     const checkboxes = document.querySelectorAll('.transaction-checkbox:checked');
