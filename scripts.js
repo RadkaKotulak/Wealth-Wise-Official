@@ -871,8 +871,10 @@ function handleFileUpload() {
             const amount = row['Price'] || 0;
             const date = row['Date'] || 'Unknown';
             const type = row['Type'] === 'Income' ? 'income' : 'expense';
-            const category = mapCategory(row['Category']);
-
+            const categoryLabel = row['Category'];
+            console.log('Category:', categoryLabel); // Log category for debugging
+            const category = mapCategory(categoryLabel);
+        
             addTransactionFromExcel(description, amount, date, type, category);
         });
 
@@ -887,28 +889,28 @@ function handleFileUpload() {
     reader.readAsBinaryString(file);
 }
 
-function mapCategory(category) {
-    const categories = {
-        salary: 'Salary',
-        groceries: 'Groceries',
-        rent: 'Rent',
-        utilities: 'Utilities',
-        transportation: 'Transportation',
-        healthcare: 'Healthcare',
-        diningOut: 'Dining Out',
-        shopping: 'Shopping',
-        clothes: 'Clothes',
-        entertainment: 'Entertainment',
-        personalCare: 'Personal Care',
-        car: 'Car',
-        travel: 'Travel',
-        gift: 'Gift',
-        investment: 'Investment',
-        otherIncome: 'Other Income',
-        otherExpense: 'Other Expense'
+function mapCategory(categoryLabel) {
+    const categoryMap = {
+        'Salary': 'salary',
+        'Investment': 'investment',
+        'Gift': 'gift',
+        'Other Income': 'otherIncome',
+        'Groceries': 'groceries',
+        'Rent': 'rent',
+        'Utilities': 'utilities',
+        'Transportation': 'transportation',
+        'Entertainment': 'entertainment',
+        'Healthcare': 'healthcare',
+        'Dining Out': 'diningOut',
+        'Shopping': 'shopping',
+        'Clothes': 'clothes',
+        'Personal Care': 'personalCare',
+        'Car': 'car',
+        'Travel': 'travel',
+        'Other Expense': 'otherExpense'
     };
 
-    return categories[category] || 'otherExpense';
+    return categoryMap[categoryLabel] || 'other_expense';
 }
 
 function addTransactionFromExcel(description, amount, date, type, category) {
