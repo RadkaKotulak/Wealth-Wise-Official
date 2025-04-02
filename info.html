@@ -10,6 +10,71 @@
     <header> 
         <h1>Wealth Wise</h1>
     </header>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+        }
+        .filters-wrapper {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .filter-container {
+            background-color: #e0e7ff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .filter-container label {
+            font-weight: bold;
+        }
+        .filter-container select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .summary-table, .categories-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .summary-table th, .summary-table td, .categories-table th, .categories-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .summary-table th, .categories-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .summary-table tbody tr:nth-child(even), .categories-table tbody tr:nth-child(even) {
+            background-color: #f4f4f9;
+        }
+        .summary-table tbody tr:nth-child(odd), .categories-table tbody tr:nth-child(odd) {
+            background-color: #e0e7ff;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4CAF50;
+        }
+    </style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
