@@ -406,16 +406,34 @@ tr:hover {
 }
 
 .zoom-btn {
-    display: block;
-    margin: 10px auto;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: transparent;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 35px;
+    height: 35px;
+  }
 
-.zoom-btn:hover {
-    background-color: #0056b3;
-}
+  .arrow-top-right, .arrow-bottom-left {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+  }
+
+  .arrow-top-right {
+    border-width: 0 15px 15px 0;
+    border-color: transparent #333 transparent transparent;
+    top: 5px;
+    right: 5px;
+  }
+
+  .arrow-bottom-left {
+    border-width: 15px 0 0 15px;
+    border-color: transparent transparent transparent #333;
+    bottom: 5px;
+    left: 5px;
+  }
