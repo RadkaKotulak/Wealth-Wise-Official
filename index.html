@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         /* Slick Carousel Arrows */
         .slick-prev, .slick-next {
@@ -35,10 +37,10 @@
         <h2>Your Own Financial Analyst!</h2>
     </header>
    
-<div style="display: flex; justify-content: center; align-items: center; height: 50px;">
-    <button onclick="window.location.href='https://radkakotulak.github.io/Wealth-Wise-Official/info.html';" style="background-color: #0037ea; color: white;">QUICK INFO</button>
-</div>
-
+    <div style="display: flex; justify-content: center; align-items: center; height: 50px;">
+        <button onclick="window.location.href='info.html';" style="background-color: #0037ea; color: white;">QUICK INFO</button>
+    </div>
+    
     <main>
        
 
@@ -139,32 +141,54 @@
     </div>
 
         
-
-        <h2>Charts and Analysis</h2>
-        <div id="charts">
-            <div class="chart-row">
-                <div class="chart-container">
-                    <canvas id="transactionChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="balanceChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="savingsChart"></canvas>
-                </div>
+ 
+    h2>Charts and Analysis</h2>
+    <div id="charts">
+        <div class="chart-row">
+            <div class="chart-container">
+                <canvas id="transactionChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
             </div>
-            <div class="chart-row">
-                <div class="chart-container">
-                    <canvas id="expenseCategoryChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="additionalChart1"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="additionalChart2"></canvas>
-                </div>
+            <div class="chart-container">
+                <canvas id="balanceChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
             </div>
         </div>
+        <div class="chart-row">
+            <div class="chart-container full-width">
+                <canvas id="expenseCategoryChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-container">
+                <canvas id="savingsChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="additionalChart1"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-container full-width">
+                <canvas id="additionalChart2"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+        </div>
+    </div>
+    
+  
+    <!-- Modal -->
+    <div id="chartModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <canvas id="modalChart"></canvas>
+        </div>
+    </div>
+
+
+    
         <div class="carousel">
             <div class="carousel-item">
                 <section class="section">
