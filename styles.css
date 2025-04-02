@@ -114,6 +114,17 @@ form input, form select, .filter-container select {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Hide budgeting container on mobile devices */
+@media (max-width: 650px) {
+    .budget-container {
+        display: none;
+    }
+    #budgetVsActualChart {
+        display: none;
+    }
+}
+
+
 /* Tables */
 table {
     width: 100%;
