@@ -1297,3 +1297,56 @@ $(document).ready(function(){
     }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the modal
+    var modal = document.getElementById("chartModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Ensure the modal chart element exists
+    var modalChartElement = document.getElementById('modalChart');
+    if (!modalChartElement) {
+        console.error('Modal chart element not found');
+        return;
+    }
+
+    // Get the modal chart context
+    var modalCtx = modalChartElement.getContext('2d');
+    var modalChart;
+
+    document.querySelectorAll('.zoom-btn').forEach(button => {
+        console.log('Attaching event listener to button:', button);
+        button.addEventListener('click', function() {
+            console.log('Zoom button clicked');
+            var chartCanvas = this.previousElementSibling;
+            var chartInstance = Chart.getChart(chartCanvas); // Get the Chart.js instance
+
+            if (!chartInstance) {
+                console.error('Chart instance not found for canvas:', chartCanvas);
+                return;
+            }
+
+            console.log('Chart instance:', chartInstance);
+
+            modal.style.display = "block";
+
+            // Destroy previous modal chart instance if exists
+            if (modalChart) {
+                modalChart.destroy();
+            }
+
+            // Create a new chart instance in the modal
+            modalChart = new Chart(modalCtx, {
+                type: chartInstance.config.type,
+                data: chartInstance.config.data,
+                options: chartInstance.config.options
+            });
+        });
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() { 
+        modal.style.display = "none";
+    }
+});
