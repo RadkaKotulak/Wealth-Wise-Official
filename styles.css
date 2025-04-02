@@ -117,12 +117,13 @@ form input, form select, .filter-container select {
 /* Hide budgeting container on mobile devices */
 @media (max-width: 650px) {
     .budget-container {
-        display: none;
+        display: none !important;
     }
     #budgetVsActualChart {
-        display: none;
+        display: none !important;
     }
 }
+
 
 
 
