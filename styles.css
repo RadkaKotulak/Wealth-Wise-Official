@@ -125,7 +125,9 @@ form input, form select, .filter-container select {
     }
 }
 
-
+tr:hover {
+    background-color: #dadadab0;
+}
 
 /* Tables */
 table {
