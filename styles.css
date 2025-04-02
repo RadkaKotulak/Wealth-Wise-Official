@@ -121,6 +121,9 @@ form input, form select, .filter-container select {
     }
     #budgetVsActualChart {
         display: none !important;
+    
+    .budget-form {
+        display: none !important;
     }
 }
 
