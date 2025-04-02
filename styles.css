@@ -124,6 +124,9 @@ form input, form select, .filter-container select {
     
     .budget-form {
         display: none !important;
+
+    .budget-summary {
+        display: none !important;
     }
 }
 
