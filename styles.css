@@ -307,4 +307,45 @@ tr:hover {
     background-color: #f9f9f9;
 }
 
+/* Responsive Design */
+@media (max-width: 650px) {
+    .chart-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .chart-container {
+        width: 97%;
+    }
+    table {
+        font-size: 14px;
+    }
+    .budget-container {
+        flex-direction: column;
+    }
+    .summary-container {
+        flex-direction: column;
+    }
+    .summary, .goal-chart-container, .budget-vs-actual-chart-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .filters-wrapper {
+        flex-direction: column;
+    }
+    .filter-container {
+        width: 100%;
+    }
+    .summary-table, .categories-table {
+        overflow-x: auto;
+    }
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    th, td {
+        white-space: nowrap;
+    }
+}
 
