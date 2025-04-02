@@ -125,6 +125,7 @@ form input, form select, .filter-container select {
 }
 
 
+
 /* Tables */
 table {
     width: 100%;
@@ -202,7 +203,7 @@ td.expense {
 }
 
 .chart-container {
-    width: 32%;
+    width: 20%;
     background-color: #fff;
     padding: 10px;
     border-radius: 8px;
