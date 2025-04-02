@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Wise - info</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Designer (2).jpeg" type="image/png">
+ 
+    <header> 
+        <h1>Wealth Wise</h1>
+    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Tracker</title>
+</head>
+<body>
+    <main>
+        <div style="display: flex; justify-content: center; align-items: center; height: 50px;">
+            <button onclick="window.location.href='index.html';" style="background-color: #0037ea; color: white;">MAIN MENU</button>
+        </div>
+
+        <div class="filters-wrapper">
+            <div class="filter-container">
+                <label for="yearSelect">Select Year:</label>
+                <select id="yearSelect" onchange="filterTransactionsByYear()" aria-label="Select Year">
+                    <option value="all">All</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                </select>
+            </div>
+     
+            <div class="filter-container">
+                <label for="monthSelect">Select Month:</label>
+                <select id="monthSelect" onchange="filterTransactionsByMonth()" aria-label="Select Month">
+                    <option value="all">All</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+        </div>
+       
+      
+        
+        <div id="summaryTable" class="summary-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Total Income</th>
+                        <th>Total Expenses</th>
+                        <th>Savings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="totalIncome"></td>
+                        <td id="totalExpense"></td>
+                        <td id="balance"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="categoriesTable" class="categories-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Expense (€)</th>
+                        <th>Percentage (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="categoriesTableBody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="scriptsInfo.js"></script>
+</body>
+</html>
+
+
+    <script src="scriptsInfo.js"></script>
+</body>
+</html>
