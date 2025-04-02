@@ -1,12 +1,12 @@
 let transactions = [];
 let nextId = 1;
-let filteredTransactions = [];
 let savings = 0;
 let editMode = false;
 let editId = null;
 let transactionChart, balanceChart, savingsChart, expenseCategoryChart, additionalChart1, additionalChart2, goalChart;
 let budgetVsActualChart;
 let allTransactions = [];
+let filteredTransactions = transactions; // Declare once at the top
 
 
 
@@ -122,22 +122,6 @@ function deleteTransaction(id) {
     }
 }
 
-// Filter transactions by selected month
-function filterTransactionsByMonth() {
-    const selectedMonth = document.getElementById('monthSelect').value;
-
-    if (selectedMonth === 'all') {
-        filteredTransactions = transactions;
-    } else {
-        filteredTransactions = transactions.filter(transaction => {
-            const transactionMonth = transaction.date.split('-')[1];
-            return transactionMonth === selectedMonth;
-        });
-    }
-
-    updateTable();
-}
-// Filter transactions by selected year
 function filterTransactionsByYear() {
     const selectedYear = document.getElementById('yearSelect').value;
 
@@ -145,14 +129,35 @@ function filterTransactionsByYear() {
         filteredTransactions = transactions;
     } else {
         filteredTransactions = transactions.filter(transaction => {
-            const transactionYear = transaction.date.split('-')[0]; // Corrected to get the year
+            const transactionYear = transaction.date.split('-')[0];
             return transactionYear === selectedYear;
+        });
+    }
+
+    filterTransactionsByMonth(); // Apply month filter after year filter
+}
+
+function filterTransactionsByMonth() {
+    const selectedMonth = document.getElementById('monthSelect').value;
+
+    if (selectedMonth === 'all') {
+        filteredTransactions = transactions.filter(transaction => {
+            const transactionYear = document.getElementById('yearSelect').value;
+            return transactionYear === 'all' || transaction.date.split('-')[0] === transactionYear;
+        });
+    } else {
+        filteredTransactions = filteredTransactions.filter(transaction => {
+            const transactionMonth = transaction.date.split('-')[1];
+            return transactionMonth === selectedMonth;
         });
     }
 
     updateTable();
 }
 
+// Add event listeners to call the filter functions when the year or month is changed
+document.getElementById('yearSelect').addEventListener('change', filterTransactionsByYear);
+document.getElementById('monthSelect').addEventListener('change', filterTransactionsByMonth);
 
 // Update the table and calculations
 function updateTable() {
@@ -1291,5 +1296,4 @@ $(document).ready(function(){
         });
     }
 });
-
 
