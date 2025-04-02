@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wealth Wise</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+    <link rel="icon" href="Designer (2).jpeg" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/pouchdb@7.2.1/dist/pouchdb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Slick Carousel Arrows */
+        .slick-prev, .slick-next {
+            color: black !important;
+            width: 50px;
+            z-index: 1;
+        }
+
+        .slick-prev:before, .slick-next:before {
+            color: rgb(56, 96, 68) !important;
+            font-size: 40px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header> 
+        <h1>Wealth Wise</h1>
+        <h2>Your Own Financial Analyst!</h2>
+    </header>
+   
+    <div style="display: flex; justify-content: center; align-items: center; height: 50px;">
+        <button onclick="window.location.href='info.html';" style="background-color: #0037ea; color: white;">QUICK INFO</button>
+    </div>
+    
+    <main>
+       
+
+
+
+
+        <button id="excel" onclick="exportToExcel()" class="excel-btn">
+            <i class="fas fa-file-excel"></i> Export to Excel
+        </button>
+        <button id="excel" onclick="document.getElementById('fileInput').click()" class="excel-btn">
+            <i class="fas fa-file-excel"></i> Import from Excel</button>
+        <input type="file" id="fileInput" style="display: none;" accept=".xlsx, .xls" onchange="handleFileUpload()">
+
+
+        <button type="button" class="collapsible">+</button>
+            <div class="content">
+
+        <form id="transactionForm">
+            <section class="section">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required aria-label="description">
+
+            <label for="amount">Price (€):</label>
+            <input type="number" step="0.01" id="amount" name="amount" required aria-label="amount">
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required aria-label="date">
+
+            <label for="type">Type:</label>
+            <select id="type" name="type" required aria-label="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required aria-label="Category">
+                <option value="salary" title="Income from employment, including bonuses and tips">Salary</option>
+                <option value="groceries" title="Spending on food and household supplies from supermarkets">Groceries</option>
+                <option value="rent" title="Payments for housing, Rent">Rent</option>
+                <option value="utilities" title="Bills for electricity, water, gas, internet, and phone services">Utilities</option>
+                <option value="transportation" title="Costs for fuel, public transport, parking">Transportation</option>
+                <option value="healthcare" title="Medical expenses, including doctor visits, medications, and health insurance premiums">Healthcare</option>
+                <option value="diningOut" title="Money spent at restaurants, cafes, and fast food outlets">Dining Out</option>
+                <option value="shopping" title="Purchases of electronics, and other personal items">Shopping</option>
+                <option value="clothes" title="Expenses specifically for clothing">Clothes</option>
+                <option value="entertainment" title="Spending on movies, concerts, and leisure activities">Entertainment</option>
+                <option value="personalCare" title="Expenses for grooming, beauty products, and personal hygiene items">Personal Care</option>
+                <option value="car" title="Payments for car checks, insurance, mechanics, tyres">Car</option>
+                <option value="travel" title="Costs related to vacations, including flights, hotels, and travel insurance">Travel</option>
+                <option value="gift" title="Money spent on gifts for others Birthdays, Christmas">Gift</option>
+                <option value="investment" title="Money set aside for savings accounts, retirement funds, and other investments">Investment</option>
+                <option value="otherIncome" title="Additional sources of income, such as freelance work, rental income, or investment returns">Other Income</option>
+                <option value="otherExpense" title="Miscellaneous spending that doesn't fit into the other categories, such as unexpected costs or one-time purchases">Other Expense</option>
+            </select>
+            
+
+            <button type="button" onclick="addTransaction()">Add Transaction</button>
+        </section>
+        </form>
+            </div>
+
+     <div class="filters-wrapper">
+        <div class="filter-container">
+            <label for="yearSelect">Select Year:</label>
+            <select id="yearSelect" onchange="filterTransactionsByYear()" aria-label="Select Year">
+                <option value="all">All</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+            </select>
+        </div>
+ 
+        <div class="filter-container">
+            <label for="monthSelect">Select Month:</label>
+            <select id="monthSelect" onchange="filterTransactionsByMonth()" aria-label="Select Month">
+                <option value="all">All</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        </div>
+    </div>
+
+        
+ 
+    h2>Charts and Analysis</h2>
+    <div id="charts">
+        <div class="chart-row">
+            <div class="chart-container">
+                <canvas id="transactionChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="balanceChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-container full-width">
+                <canvas id="expenseCategoryChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-container">
+                <canvas id="savingsChart"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="additionalChart1"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+        </div>
+        <div class="chart-row">
+            <div class="chart-container full-width">
+                <canvas id="additionalChart2"></canvas>
+                <button class="zoom-btn">Zoom</button>
+            </div>
+        </div>
+    </div>
+    
+  
+    <!-- Modal -->
+    <div id="chartModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <canvas id="modalChart"></canvas>
+        </div>
+    </div>
+
+
+    
+        <div class="carousel">
+            <div class="carousel-item">
+                <section class="section">
+                    <h2>Budgeting</h2>
+                    <div class="budget-container">
+                        <section class="section">
+                        <form id="budgetForm" class="budget-form">
+                            <label for="monthlyWage">Monthly Wage (€):</label>
+                            <input type="number" id="monthlyWage" name="monthlyWage" required>
+
+                            <label for="budgetGoal">Savings Goal (€):</label>
+                            <input type="number" id="budgetGoal" name="budgetGoal" required>
+                            <button type="button" id="calculateBudgetButton" onclick="calculateMonthlyWage()">Calculate Budget</button>
+
+                        </section>
+                        </form>
+                        <div class="budget-summary">
+                            <h2>Budget Summary</h2>
+                            <div><strong>Salary:</strong> <span id="budgetSalary">0 €</span></div>
+                            <div><strong>Groceries:</strong> <span id="budgetGroceries">0 €</span></div>
+                            <div><strong>Rent:</strong> <span id="budgetRent">0 €</span></div>
+                            <div><strong>Utilities:</strong> <span id="budgetUtilities">0 €</span></div>
+                            <div><strong>Transportation:</strong> <span id="budgetTransportation">0 €</span></div>
+                            <div><strong>Healthcare:</strong> <span id="budgetHealthcare">0 €</span></div>
+                            <div><strong>Dining Out:</strong> <span id="budgetDiningOut">0 €</span></div>
+                            <div><strong>Shopping:</strong> <span id="budgetShopping">0 €</span></div>
+                            <div><strong>Clothes:</strong> <span id="budgetClothes">0 €</span></div>
+                            <div><strong>Entertainment:</strong> <span id="budgetEntertainment">0 €</span></div>
+                            <div><strong>Personal Care:</strong> <span id="budgetPersonalCare">0 €</span></div>
+                            <div><strong>Car:</strong> <span id="budgetCar">0 €</span></div>
+                            <div><strong>Travel:</strong> <span id="budgetTravel">0 €</span></div>
+                            <div><strong>Gift:</strong> <span id="budgetGift">0 €</span></div>
+                            <div><strong>Investment:</strong> <span id="budgetInvestment">0 €</span></div>
+                            <div><strong>Other Income:</strong> <span id="budgetOtherIncome">0 €</span></div>
+                            <div><strong>Other Expense:</strong> <span id="budgetOtherExpense">0 €</span></div>
+                        </div>
+                        
+                        
+
+                        <div class="category-amounts-section">
+                            <h2>Category Amounts</h2>
+                            <div id="categoryAmounts"></div>
+                        </div>
+                    </div>
+                    <div class="budget-vs-actual-chart-container">
+                        <canvas id="budgetVsActualChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <div class="carousel-item">
+                <section class="section">
+                    <h2>Goal Tracking</h2>
+                    <div class="summary-container">
+                        <div class="summary">
+                            <div><strong>Total Income:</strong> <span id="totalIncome">0 €</span></div>
+                            <div><strong>Total Expenses:</strong> <span id="totalExpense">0 €</span></div>
+                            <div><strong>Balance:</strong> <span id="balance">0 €</span></div>
+                            <div><strong>Savings:</strong> <span id="totalSavings">0 €</span></div>
+                            <div><span id="percentage">0% completed</span></div>
+                            <label for="goal">Finance Goal: </label>
+                            <input type="number" id="goal" placeholder="Enter your finance goal"><br><br>
+                            <label for="otherSavings">Other Savings: </label>
+                            <input type="number" id="otherSavings" placeholder="Enter other savings"><br><br>
+                        </div>
+                        <div class="goal-chart-container">
+                            <canvas id="goalChart"></canvas>
+                        </div>
+                    </div>
+                    <button class="special-button" id="updateChartButton" onclick="updateChart()">Update Chart</button>
+                </section>
+            </div>
+        </div>
+    
+
+        <button type="button" class="colltable">Show table</button>
+            <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <div class="sort-buttons">
+                        <button onclick="sortByMonth('asc')">Old Transaction</button>
+                        <button onclick="sortByMonth('desc')">New Transacions</button>
+                        <button onclick="sortByAmount('asc')">Ascending Order</button>
+                        <button onclick="sortByAmount('desc')">Descending Order</button>
+                        <button onclick="sortByType('asc')">Expenses</button>
+                        <button onclick="sortByType('desc')">Income</button>
+                    </div>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                   
+                    
+                </tr>
+            </thead>
+            <tbody id="transactionTable">
+                <!-- Dynamicky sa pridajú riadky transakcií -->
+                
+            </tbody>
+        </table>
+
+        <button onclick="deleteSelectedTransactions()">Delete Selected</button>
+            </div>
+    </head>
+    <body>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Wealth Wise - Your Own Financial Analyst !</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+  
+
+
+</body>
+</html>
