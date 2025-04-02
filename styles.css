@@ -114,24 +114,14 @@ form input, form select, .filter-container select {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Hide budgeting container on mobile devices */
+/* Hide budgeting section on mobile devices */
 @media (max-width: 650px) {
-    .budget-container {
-        display: none !important;
-    }
-     .budget-vs-actual-chart-container {
-        display: none !important;
-         
-    #budgetVsActualChart {
-        display: none !important;
-    
-    .budget-form {
-        display: none !important;
-
-    .budget-summary {
-        display: none !important;
+    .budget-container,
+    .budget-vs-actual-chart-container {
+        display: none;
     }
 }
+
 
 
 
