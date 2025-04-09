@@ -918,14 +918,14 @@ function deleteSelectedTransactions() {
     }
 }
 function deleteAllTransactions() {
-                if (confirm('Are you sure you want to delete all transactions?')) {
-                    transactions = [];
-                    filteredTransactions = transactions; // Reset filter
-                    saveTransactions();
-                    updateTable();
-                    alert('All transactions deleted successfully!');
-                }
-            }
+     if (confirm('Are you sure you want to delete all transactions?')) {
+        transactions = [];
+        filteredTransactions = transactions; // Reset filter
+        saveTransactions();
+        updateTable();
+        alert('All transactions deleted successfully!');
+    }
+}
     
 // Function to toggle all checkboxes
 function toggleSelectAll(selectAllCheckbox) {
