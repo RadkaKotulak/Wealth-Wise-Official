@@ -1088,8 +1088,6 @@ function calculateBudget() {
 
 function displayCategoryAmounts(budgetAmounts) {
     const categoryTotals = {
-        
-    salary: 0,
     groceries: 0,
     rent: 0,
     utilities: 0,
